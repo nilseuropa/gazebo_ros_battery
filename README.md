@@ -1,6 +1,6 @@
 # Gazebo-ROS battery plugin
 
-This repository contains a generic battery plugin for Gazebo to be used ROS robot simulations. It implements two operation modes, a simple linear charge/discharge model and a parametric nonlinear dynamic discharge model. For the parameter tuning of the latter we provide a visualization tool of the discharge curves under various temperatures and current loads.
+This repository contains a generic battery plugin for Gazebo to be used in ROS robot simulations. It implements two operation modes, a simple linear charge/discharge model and a parametric nonlinear dynamic discharge model. For the parameter tuning of the latter we provide a visualization tool of the discharge curves under various temperatures and current loads.
 
 ## Battery models
 
@@ -122,7 +122,7 @@ Usually some parameters and a discharge curve is provided by battery manufacture
 
 
 
-**Authors: ** Marton Juhasz - [nilseuropa](https://github.com/nilseuropa), Gergely Gyebroszki - [gyebro](https://github.com/gyebro)
+**Authors:** Marton Juhasz - [nilseuropa](https://github.com/nilseuropa), Gergely Gyebroszki - [gyebro](https://github.com/gyebro)
 
 **Sources:** https://www.mathworks.com/help/physmod/sps/powersys/ref/battery.html
 
