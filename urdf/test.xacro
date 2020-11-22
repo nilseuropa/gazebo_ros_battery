@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<robot name="test_model" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <link name="base_footprint">
+    <visual>
+      <origin rpy="0 0 0 " xyz="0 0 0.005"/>
+      <geometry>
+          <box size="0.4 0.4 0.01"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0 " xyz="0 0 0.005"/>
+      <geometry>
+        <box size="0.4 0.4 0.01"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="footprint_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="battery_link"/>
+    <origin rpy="0 0 0" xyz="0 0 0.01"/>
+  </joint>
+
+  <link name="battery_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.01"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.01"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <xacro:include filename="$(find gazebo_ros_battery)/xacro/battery.xacro"/>
+  <xacro:battery sensor_name="battery" frame_id="battery_link" params_yaml="$(find gazebo_ros_battery)/params/G24B4.yaml"/>
+
+</robot>

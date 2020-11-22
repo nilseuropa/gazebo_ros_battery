@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="POWER_SUPPLY_TECHNOLOGY_UNKNOWN"  value="0"/>
+  <xacro:property name="POWER_SUPPLY_TECHNOLOGY_NIMH"     value="1"/>
+  <xacro:property name="POWER_SUPPLY_TECHNOLOGY_LION"     value="2"/>
+  <xacro:property name="POWER_SUPPLY_TECHNOLOGY_LIPO"     value="3"/>
+  <xacro:property name="POWER_SUPPLY_TECHNOLOGY_LIFE"     value="4"/>
+  <xacro:property name="POWER_SUPPLY_TECHNOLOGY_NICD"     value="5"/>
+  <xacro:property name="POWER_SUPPLY_TECHNOLOGY_LIMN"     value="6"/>
+  <xacro:property name="POWER_SUPPLY_TECHNOLOGY_VRLA"     value="7"/>
+
+  <!-- Parametric battery -->
+  <xacro:macro name="battery" params="sensor_name frame_id params_yaml">
+    <xacro:property name="battery_param" value="${load_yaml(params_yaml)}"/>
+    <gazebo>
+        <plugin filename="libgazebo_ros_battery.so" name="${sensor_name}">
+            <frame_id>${frame_id}</frame_id>
+            <battery_topic>${sensor_name}/status</battery_topic>
+            <consumer_topic>${sensor_name}/consumer</consumer_topic>
+            <battery_voltage_topic>${sensor_name}/voltage</battery_voltage_topic>
+            <publish_voltage>${battery_param['publish_voltage']}</publish_voltage>
+            <num_of_consumers>${battery_param['num_of_consumers']}</num_of_consumers>
+            <technology>${battery_param['technology']}</technology>
+            <design_capacity>${battery_param['design_capacity']}</design_capacity>
+            <number_of_cells>${battery_param['number_of_cells']}</number_of_cells>
+            <nominal_voltage>${battery_param['nominal_voltage']}</nominal_voltage>
+            <full_charge_voltage>${battery_param['full_charge_voltage']}</full_charge_voltage>
+            <cut_off_voltage>${battery_param['cut_off_voltage']}</cut_off_voltage>
+            <internal_resistance>${battery_param['internal_resistance']}</internal_resistance>
+            <current_filter_tau>${battery_param['current_filter_tau']}</current_filter_tau>
+            <polarization_constant>${battery_param['polarization_constant']}</polarization_constant>
+            <exponential_voltage>${battery_param['exponential_voltage']}</exponential_voltage>
+            <exponential_capacity>${battery_param['exponential_capacity']}</exponential_capacity>
+            <characteristic_time>${battery_param['characteristic_time']}</characteristic_time>
+            <reversible_voltage_temp>${battery_param['reversible_voltage_temp']}</reversible_voltage_temp>
+            <arrhenius_rate_polarization>${battery_param['arrhenius_rate_polarization']}</arrhenius_rate_polarization>
+            <capacity_temp_coeff>${battery_param['capacity_temp_coeff']}</capacity_temp_coeff>
+            <design_temperature>${battery_param['design_temperature']}</design_temperature>
+            <temperature_response_tau>${battery_param['temperature_response_tau']}</temperature_response_tau>
+            <use_nonlinear_model>True</use_nonlinear_model>
+            <update_rate>10.0</update_rate>
+            <rosDebugLevel>Debug</rosDebugLevel>
+        </plugin>
+    </gazebo>
+  </xacro:macro>
+
+  <!-- Greenworks G24B4 24V Lithium battery -->
+  <xacro:macro name="battery_greenworks_g24b4" params="sensor_name frame_id num_of_consumers">
+    <gazebo>
+        <plugin filename="libgazebo_ros_battery.so" name="${sensor_name}">
+          <frame_id>${frame_id}</frame_id>
+          <num_of_consumers>${num_of_consumers}</num_of_consumers>
+          <battery_topic>${sensor_name}/status</battery_topic>
+          <consumer_topic>${sensor_name}/consumer</consumer_topic>
+          <publish_voltage>True</publish_voltage>
+          <battery_voltage_topic>${sensor_name}/voltage</battery_voltage_topic>
+          <technology>POWER_SUPPLY_TECHNOLOGY_LION</technology>
+          <design_capacity>4.0</design_capacity>
+          <number_of_cells>6</number_of_cells>
+          <nominal_voltage>24</nominal_voltage>
+          <full_charge_voltage>25.2</full_charge_voltage>
+          <cut_off_voltage>18.0</cut_off_voltage>
+          <internal_resistance>0.11</internal_resistance>
+          <current_filter_tau>1</current_filter_tau>
+          <use_nonlinear_model>True</use_nonlinear_model>
+          <polarization_constant>0.07</polarization_constant>
+          <exponential_voltage>0.7</exponential_voltage>
+          <exponential_capacity>3.0</exponential_capacity>
+          <characteristic_time>220.0</characteristic_time>
+          <reversible_voltage_temp>0.05</reversible_voltage_temp>
+          <arrhenius_rate_polarization>800.0</arrhenius_rate_polarization>
+          <capacity_temp_coeff>0.01</capacity_temp_coeff>
+          <temperature_response_tau>0.5</temperature_response_tau>
+          <update_rate>10.0</update_rate>
+          <rosDebugLevel>Debug</rosDebugLevel>
+        </plugin>
+    </gazebo>
+  </xacro:macro>
+
+  <!-- Ultracell 12V 9Ah Gel battery -->
+  <xacro:macro name="battery_ultracell_ul129" params="sensor_name frame_id num_of_consumers">
+    <gazebo>
+        <plugin filename="libgazebo_ros_battery.so" name="${sensor_name}">
+            <frame_id>${frame_id}</frame_id>
+            <num_of_consumers>${num_of_consumers}</num_of_consumers>
+            <battery_topic>${sensor_name}/status</battery_topic>
+            <consumer_topic>${sensor_name}/consumer</consumer_topic>
+            <publish_voltage>True</publish_voltage>
+            <battery_voltage_topic>${sensor_name}/voltage</battery_voltage_topic>
+            <technology>POWER_SUPPLY_TECHNOLOGY_VRLA</technology>
+            <design_capacity>9.0</design_capacity>
+            <number_of_cells>6</number_of_cells>
+            <nominal_voltage>12</nominal_voltage>
+            <full_charge_voltage>13.8</full_charge_voltage>
+            <cut_off_voltage>0.0</cut_off_voltage>
+            <internal_resistance>0.018</internal_resistance>
+            <current_filter_tau>1</current_filter_tau>
+            <use_nonlinear_model>False</use_nonlinear_model>
+            <linear_discharge_coeff>-1</linear_discharge_coeff>
+            <update_rate>10.0</update_rate>
+            <rosDebugLevel>Debug</rosDebugLevel>
+        </plugin>
+    </gazebo>
+  </xacro:macro>
+
+</robot>
