@@ -73,7 +73,7 @@ void GazeboRosBattery::Load ( physics::ModelPtr _parent, sdf::ElementPtr _sdf )
 		battery_state_.capacity = design_capacity_;
 		// battery_state_.capacity   = last_full_capacity_;
 		battery_state_.present = true;
-		battery_state_.temperature = temperature_ = design_temperature_;
+		//battery_state_.temperature = temperature_ = design_temperature_;
 
 		// start
 		if ( this->update_rate_ > 0.0 ) this->update_period_ = 1.0 / this->update_rate_; else this->update_period_ = 0.0;
