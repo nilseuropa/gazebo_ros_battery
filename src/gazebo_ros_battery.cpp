@@ -242,7 +242,7 @@ void GazeboRosBattery::UpdateChild() {
 				battery_state_.current    = current_lpf_;
 				battery_state_.charge     = charge_;
 				battery_state_.percentage = (charge_/design_capacity_)*100;
-				battery_state_.temperature = temperature_;
+				// battery_state_.temperature = temperature_;
 				battery_state_publisher_.publish( battery_state_ );
 				std_msgs::Float32 battery_voltage_;
 				battery_voltage_.data = voltage_;
